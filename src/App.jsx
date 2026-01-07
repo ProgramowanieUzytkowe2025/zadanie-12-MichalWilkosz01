@@ -1,19 +1,28 @@
 import './App.css'
 import { AppCalculator } from './AppCalculator'
 import { AppHeader } from './AppHeader'
-import { useState } from 'react';
+import { FontProvider, useFont } from './FontContext'
 
-export default function App() {
-  const [czcionka, setCzcionka] = useState('small');
+// Tu musi byc
+function AppContent() {
+  const { czcionka } = useFont();
 
   return (
     <div className="app" style={{ fontSize: czcionka }}>
       <div>
-        <AppHeader imie={'Imię'} nazwisko={'Nazwisko'} onZmianaCzcionki={(val) => setCzcionka(val)}/>
+        <AppHeader imie={'Michał'} nazwisko={'Wilkosz'} />
       </div>
       <div>
         <AppCalculator />
       </div>
     </div>
-  )
+  );
+}
+
+export default function App() {
+  return (
+    <FontProvider>
+      <AppContent />
+    </FontProvider>
+  );
 }
